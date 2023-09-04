@@ -1,0 +1,71 @@
+{
+  "spaceName": "my todo space",
+  "lists": [
+    {
+      "listName": "Todo",
+      "todos": [
+        {
+          "priority": 0,
+          "time": 1,
+          "content": "Crear formulario para crear cliente",
+          "id": "4f1ae535-c6c7-4901-b359-172d246f4209"
+        },
+        {
+          "priority": 0,
+          "time": 1,
+          "content": "Mostrar listado de clientes\n",
+          "id": "08aaef42-f6cb-4f0b-a8bb-f98f8033ae1c"
+        },
+        {
+          "priority": 0,
+          "time": 0,
+          "content": "adicionar un select de cliente en formulario project",
+          "id": "8bbbc22a-ae3c-4780-a8f2-d57f563ef924"
+        },
+        {
+          "priority": 0,
+          "time": 0,
+          "content": "añadir en projectlist pagado o n",
+          "id": "fbef06fd-e1c3-455b-8eec-4c6d7216d050"
+        },
+        {
+          "priority": 0,
+          "time": 0,
+          "content": "permitir borrar item.quote en el formulario",
+          "id": "982c2a5f-3643-42de-935c-ec43d7296480"
+        }
+      ],
+      "id": "997ae640-8f6c-422e-b614-5030506cd18d"
+    },
+    {
+      "listName": "Doin",
+      "todos": [
+        {
+          "priority": 0,
+          "time": 0,
+          "content": "Revisar el modal gallery",
+          "id": "aeca9f86-579a-485f-ac1d-744268d68a10"
+        }
+      ],
+      "id": "eb4ed4dc-b047-4150-9813-c6026451c3a7"
+    },
+    {
+      "listName": "Done",
+      "todos": [
+        {
+          "priority": 0,
+          "time": 0,
+          "content": "en pays es un json\nimage:'',value:0\n",
+          "id": "8bbce283-fcc3-4d0f-a6ba-647a0156871c"
+        },
+        {
+          "priority": 0,
+          "time": 0,
+          "content": "mostrar item.quote en el formulari ",
+          "id": "aa03af0e-58ea-4f24-9f58-1e4e09289515"
+        }
+      ],
+      "id": "590c5bc6-5b6e-4149-a0cc-57d7c28c3128"
+    }
+  ]
+}
