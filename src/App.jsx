@@ -13,7 +13,6 @@ import Alerts from './components/examples/Alerts';
 import SignsPage from './pages/SignsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import CustomersPage from './pages/CustomersPage';
-import DragDropFile from './components/examples/DragDropFIle';
 
 function App() {
   const [count, setCount] = useState(0)
