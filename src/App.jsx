@@ -21,7 +21,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<SignsPage />} />
+        <Route path='/' element={<ProjectsPage />} />
         <Route path='/ventas' element={<Alerts />} />
         <Route path='/products' element={<ProductsPage />} />
         <Route path='/cotizaciones' element={<Snacks />} />

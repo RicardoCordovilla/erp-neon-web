@@ -31,7 +31,7 @@ const ProjectsContainer = ({ customerId = null }) => {
 
     useEffect(() => {
         getProjects()
-    }, [newProject])
+    }, [newProject, customerId])
 
 
     return (

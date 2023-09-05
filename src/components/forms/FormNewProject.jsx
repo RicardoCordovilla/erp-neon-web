@@ -98,7 +98,8 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
     const updateProject = () => {
         const url = config.api.baseUrl + config.api.projects + '/id/' + item.id
         const customer_id = customer?.id
-        const body = { title, customer_id, address, confirmationDate, cost, sale, quote, pays, projectSigns, instalationDate, estimatedEnd, additionalProducts, notes, otherContacts }
+        const paystatus = pays.reduce((acc, pay) => acc + Number(pay.value), 0) >= sale ? 'Pagado' : 'Pendiente'
+        const body = { title, customer_id, address, confirmationDate, cost, sale, quote, pays, paystatus, projectSigns, instalationDate, estimatedEnd, additionalProducts, notes, otherContacts }
         console.log(url, body)
 
         axios.patch(url,
