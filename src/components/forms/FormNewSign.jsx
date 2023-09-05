@@ -7,7 +7,7 @@ import Trash from '@mui/icons-material/Delete';
 import ImagePicker from '../utils/ImagePicker';
 import ImagesContainer from '../utils/ImagesContinaer';
 import ImagePickerCloud from '../utils/ImagePickerCloud';
-import DragDropFile from '../examples/DragDropFIle';
+import DragDropFile from '../utils/DragDropFile';
 
 
 const FormNewSign = ({ setNewSign, item, setOpenModal }) => {

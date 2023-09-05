@@ -3,7 +3,7 @@ import PaysContainer from './PaysContainer'
 import { Box, Button, Card, IconButton, TextField, Typography } from '@mui/material'
 import ImagePickerCloud from './ImagePickerCloud'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import DragDropFile from '../examples/DragDropFIle';
+import DragDropFile from './DragDropFile';
 
 
 const PaysField = ({ pays, setPays }) => {

@@ -1,7 +1,7 @@
 import { Card, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import ImagePicker from './ImagePicker'
-import DragDropFile from '../examples/DragDropFIle'
+import DragDropFile from './DragDropFile'
 
 const QuoteContainer = ({ quote, setQuote }) => {
 

@@ -6,7 +6,7 @@ import Trash from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ImagePicker from '../utils/ImagePicker';
 import ImagePickerCloud from '../utils/ImagePickerCloud';
-import DragDropFile from '../examples/DragDropFIle';
+import DragDropFile from '../utils/DragDropFile';
 
 
 
