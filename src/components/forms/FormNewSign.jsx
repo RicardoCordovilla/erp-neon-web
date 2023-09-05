@@ -33,26 +33,45 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
     )
       .then((response) => {
         console.log(response)
-        setNewSign(response.data)
+        setNewSign(null)
       }).catch((error) => {
         console.log(error)
-      })
-      .finally(() => {
-        setOpenModal(false)
       })
   }
 
   const updateSing = () => {
     const url = config.api.baseUrl + config.api.signs + '/id/' + item.id
-    const body = { title, description, images, startProject, endProject, sale, cost, signProducts }
+    const body = { title, description, images, startProject, endProject, sale, cost, productsOfSign: signProducts }
     console.log(url, body)
     axios.patch(url,
       body
     )
       .then((response) => {
         console.log(response)
-        setNewSign(response.data)
+        setNewSign(null)
         setOpenModal(false)
+      }).catch((error) => {
+        console.log(error)
+      })
+
+  }
+
+
+
+
+  const addProducts = () => {
+    const url = config.api.baseUrl + config.api.signsaddProduct
+    const body = { signProducts }
+    console.log(url, body)
+    axios.patch(url,
+      body
+    )
+      .then((response) => {
+        console.log(response)
+        setNewSign(null)
+        setOpenModal(false)
+        updateSing()
+
       }).catch((error) => {
         console.log(error)
       })
@@ -79,6 +98,8 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
   useEffect(() => {
     getProducts()
   }, [])
+
+
 
 
   console.log(images)
@@ -185,6 +206,7 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
               Imagenes
             </Typography>
             <ImagesContainer images={images} setImages={setImages} />
+            <Divider />
             {/* <ImagePicker setImages={setImages} images={images} /> */}
             {/* <ImagePickerCloud setImages={setImages} images={images} /> */}
             <DragDropFile
@@ -267,7 +289,7 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
                 label="Cantidad"
                 variant="standard"
                 value={product?.quantity}
-                onChange={(e) => setProduct({ ...product, quantity: e.target.value })}
+                onChange={(e) => setProduct({ ...product, quantity: e.target.value, new: true })}
                 placeholder='ej: 2'
                 type='number'
               />
@@ -307,7 +329,7 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
 
       <Button variant="contained"
         onClick={() => {
-          item?.id ? updateSing() : saveSign()
+          item?.id ? addProducts() : saveSign()
         }}
       >
         {item?.id ? 'Actualizar' : 'Guardar'}
