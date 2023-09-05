@@ -33,6 +33,10 @@ const FormNewCustomer = ({ customers, setCustomers, customer, setOpenModal }) =>
             .finally(() => setOpenModal(false))
     }
 
+    useEffect(() => {
+        setAvatar(images[1])
+    }, [images])
+
     const updateCustomer = async (customer) => {
         const url = config.api.baseUrl + config.api.customers + '/id/' + customer.id
         console.log(url, customer)

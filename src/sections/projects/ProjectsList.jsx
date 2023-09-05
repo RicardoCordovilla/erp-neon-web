@@ -60,8 +60,8 @@ const Row = ({ row, setNewProject, setOpenModal }) => {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell align="center">{row?.title}</TableCell>
                 <TableCell align="center">{row?.instalationDate}</TableCell>
+                <TableCell align="center">{row?.title}</TableCell>
                 <TableCell align="center">${row?.sale}</TableCell>
                 <TableCell align="center">
                     {

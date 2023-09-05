@@ -15,7 +15,7 @@ const ModalPaysview = ({ pays }) => {
                     flexDirection: 'row',
                     // justifyContent: 'center',
                     flexWrap: 'wrap',
-                    px: 4,
+                    px: 4,                    
                 }}
                 // rowHeight={200}
                 gap={'2rem'}
@@ -29,14 +29,20 @@ const ModalPaysview = ({ pays }) => {
                                 width: '250px',
                                 height: '250px',
                                 borderRadius: '10px',
+                                backgroundColor: 'white',
                                 overflow: 'hidden',
                                 boxShadow: '0 0 10px rgba(0,0,0,0.2)',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
                                 '&:hover': {
-                                    transform: 'scale(1.3) translate(30%, -30%)',
+                                    transform: 'scale(1.3)',
+                                    opacity: 1,
+                                    zIndex: 20,
                                     boxShadow: '0 0 20px rgba(0,0,0,0.3)',
-                                }
+                                },
+                                '&:not(:hover)': {
+                                    opacity: 0.4,
+                                },
                             }}
                         >
                             <img
@@ -57,7 +63,7 @@ const ModalPaysview = ({ pays }) => {
                                 subtitle={item?.date}
                                 title={<span>Valor: {item?.value}</span>}
                                 position='below'
-
+                                align='center'
                             />
                         </ImageListItem>
                     );

@@ -1,15 +1,13 @@
-import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import { Avatar, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import React, { useState } from 'react'
 import { Edit, ViewAgenda } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom/dist';
 
 const columns = [
-    // { id: 'vieicon', label: '' },
-    // { id: 'id', label: 'ID' },
+    { id: 'avatar', label: 'Avatar', align: 'center' },
     { id: 'name', label: 'Nombre', align: 'center' },
     { id: 'phone', label: 'Telefono', align: 'center' },
     { id: 'alias', label: 'Alias', align: 'center' },
-    // { id: 'email', label: 'Email' },
     { id: 'editicon', label: 'Acciones', align: 'center' },
     { id: 'vieicon', label: 'Proyectos', align: 'center' },
 ]
@@ -36,6 +34,15 @@ const Row = ({ row, setNewCustomer, setOpenModal }) => {
     return (
         <>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} hover></TableRow>
+            <TableCell
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+            >
+                <Avatar sx={{ width: '4rem', height: '4rem' }} src={row?.avatar} alt={row?.name} />
+            </TableCell>
             <TableCell align='center'>{row.name}</TableCell>
             <TableCell align="center">{row.phone}</TableCell>
             <TableCell align="center">{row.alias}</TableCell>

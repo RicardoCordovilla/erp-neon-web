@@ -20,16 +20,16 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
     const [title, setTitle] = useState(item?.title || '')
     const [customer, setCustomer] = useState()
     const [inputValue, setInputValue] = useState('');
-    const [customerId, setCustomerId] = useState(item?.customerId)
+    const [customerId, setCustomerId] = useState(item?.customer_id || 0)
     const [address, setAddress] = useState(item?.address || '')
-    const [confirmationDate, setConfirmationDate] = useState(item?.confirmationDate || new Date())
+    const [confirmationDate, setConfirmationDate] = useState(item?.confirmationDate || '')
     const [cost, setCost] = useState(item?.cost || '')
     const [sale, setSale] = useState(item?.sale || '')
     const [quote, setQuote] = useState(item?.quote || '')
     const [pays, setPays] = useState(item?.pays || [])
     const [projectSigns, setProjectSigns] = useState(item?.projectSigns || [])
-    const [instalationDate, setInstalationDate] = useState(item?.instalationDate || new Date())
-    const [estimatedEnd, setEstimatedEnd] = useState(item?.estimatedEnd || new Date())
+    const [instalationDate, setInstalationDate] = useState(item?.instalationDate || '')
+    const [estimatedEnd, setEstimatedEnd] = useState(item?.estimatedEnd || '')
     const [additionalProducts, setAdditionalProducts] = useState(item?.additionalProducts || [])
     const [notes, setNotes] = useState(item?.notes || '')
     const [otherContacts, setOtherContacts] = useState(item?.otherContacts || '')
@@ -80,7 +80,8 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
 
     const saveProject = () => {
         const url = config.api.baseUrl + config.api.projects
-        const body = { title, address, confirmationDate, cost, sale, quote, pays, projectSigns, instalationDate, estimatedEnd, additionalProducts, notes, otherContacts }
+        const customer_id = customer?.id
+        const body = { customer_id, title, address, confirmationDate, cost, sale, quote, pays, projectSigns, instalationDate, estimatedEnd, additionalProducts, notes, otherContacts }
         console.log(url, body)
         axios.post(url,
             body
@@ -98,7 +99,8 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
 
     const updateProject = () => {
         const url = config.api.baseUrl + config.api.projects + '/id/' + item.id
-        const body = { title, customerId, address, confirmationDate, cost, sale, quote, pays, projectSigns, instalationDate, estimatedEnd, additionalProducts, notes, otherContacts }
+        const customer_id = customer?.id
+        const body = { title, customer_id, address, confirmationDate, cost, sale, quote, pays, projectSigns, instalationDate, estimatedEnd, additionalProducts, notes, otherContacts }
         console.log(url, body)
 
         axios.patch(url,
@@ -106,7 +108,7 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
         )
             .then((response) => {
                 console.log(response)
-                // setNewProject(response.data)
+                setNewProject(body)
             }).catch((error) => {
                 console.log(error)
             })
@@ -178,7 +180,7 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
                     <Autocomplete
                         id='tags-standard'
                         options={customers}
-                        value={customer}
+                        // value={customer}
                         getOptionLabel={(option) => option?.name}
                         onChange={(event, value) => {
                             setCustomer(value)
