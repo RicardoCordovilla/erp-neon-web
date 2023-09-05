@@ -49,6 +49,7 @@ const ModalGalery = ({ selectedImages, setSelectedImages }) => {
                     width: '100%',
                 }}
             >
+                <ImagePicker images={images} setImages={setImages} accept={'image/*'} />
                 <ImageList
                     sx={{
                         width: '100%',
@@ -58,7 +59,7 @@ const ModalGalery = ({ selectedImages, setSelectedImages }) => {
                         // justifyContent: 'center',
                         flexWrap: 'wrap',
                         px: 4,
-                   }}
+                    }}
                     // rowHeight={200}
                     gap={'1rem'}
                 >
@@ -111,7 +112,6 @@ const ModalGalery = ({ selectedImages, setSelectedImages }) => {
                             </ImageListItem>
                         );
                     })}
-                    <ImagePicker images={images} setImages={setImages} accept={'image/*'} />
                 </ImageList>
 
             </Box>
