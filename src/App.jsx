@@ -13,6 +13,7 @@ import Alerts from './components/examples/Alerts';
 import SignsPage from './pages/SignsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import CustomersPage from './pages/CustomersPage';
+import DragDropFile from './components/examples/DragDropFIle';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,7 +22,8 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<ProjectsPage />} />
+        {/* <Route path='/' element={<ProjectsPage />} /> */}
+        <Route path='/' element={<DragDropFile />} />
         <Route path='/ventas' element={<Alerts />} />
         <Route path='/products' element={<ProductsPage />} />
         <Route path='/cotizaciones' element={<Snacks />} />

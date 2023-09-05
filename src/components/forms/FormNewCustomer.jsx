@@ -6,6 +6,7 @@ import Trash from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ImagePicker from '../utils/ImagePicker';
 import ImagePickerCloud from '../utils/ImagePickerCloud';
+import DragDropFile from '../examples/DragDropFIle';
 
 
 
@@ -57,12 +58,13 @@ const FormNewCustomer = ({ customers, setCustomers, customer, setOpenModal }) =>
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
+                width: '100%',
             }}
         >
             <Box
                 sx={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: 'column',
                 }}
             >
 
@@ -71,7 +73,8 @@ const FormNewCustomer = ({ customers, setCustomers, customer, setOpenModal }) =>
                         Avatar
                     </Typography>
                     <Avatar sx={{ width: '10rem', height: '10rem' }} src={avatar || images[1]} />
-                    <ImagePickerCloud setImages={setImages} images={images} />
+                    {/* <ImagePickerCloud setImages={setImages} images={images} /> */}
+                    <DragDropFile setImages={setImages} images={images} />
                 </Box>
 
                 <Box

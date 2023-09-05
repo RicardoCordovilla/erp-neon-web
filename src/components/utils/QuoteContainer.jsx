@@ -1,6 +1,7 @@
 import { Card, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import ImagePicker from './ImagePicker'
+import DragDropFile from '../examples/DragDropFIle'
 
 const QuoteContainer = ({ quote, setQuote }) => {
 
@@ -8,7 +9,8 @@ const QuoteContainer = ({ quote, setQuote }) => {
     const [fileUrls, setFileUrls] = useState([quote])
 
     useEffect(() => {
-        setQuote(fileUrls[0])
+        setQuote(fileUrls[1])
+        console.log('quote', fileUrls)
     }, [fileUrls])
 
 
@@ -31,11 +33,12 @@ const QuoteContainer = ({ quote, setQuote }) => {
             </Typography>
             {
                 !quote &&
-                <ImagePicker setImages={setFileUrls} setFileTitle={setQuoteFileName} accept={'.pdf, .doc, .docx'} />
+                // <ImagePicker setImages={setFileUrls} setFileTitle={setQuoteFileName} accept={'.pdf, .doc, .docx'} />
+                <DragDropFile setImages={setFileUrls} images={fileUrls} />
             }
 
             <Typography variant='body1'>
-                <a target='_blank' href={fileUrls[0]}>{quoteFileName || 'Ver Archivo'}</a>
+                <a target='_blank' href={fileUrls[1]}>{quoteFileName || 'Ver Archivo'}</a>
             </Typography>
         </Card>
     )

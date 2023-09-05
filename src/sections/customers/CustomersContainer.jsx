@@ -65,9 +65,11 @@ const CustomersContainer = () => {
                         bgcolor: 'background.paper',
                         border: '2px solid #000',
                         boxShadow: 24,
-                        width: 'auto',
-                        height: 'auto',
-                        overflowY: 'auto',
+                        width: '90%',
+                        minWidth: '300px',
+                        maxWidth: '600px',
+                        height: '90%',
+                        overflowY: 'scroll',
                         p: 4,
                     }}
                 >

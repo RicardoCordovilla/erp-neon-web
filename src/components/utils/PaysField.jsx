@@ -3,6 +3,7 @@ import PaysContainer from './PaysContainer'
 import { Box, Button, Card, IconButton, TextField, Typography } from '@mui/material'
 import ImagePickerCloud from './ImagePickerCloud'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import DragDropFile from '../examples/DragDropFIle';
 
 
 const PaysField = ({ pays, setPays }) => {
@@ -61,7 +62,8 @@ const PaysField = ({ pays, setPays }) => {
 
             {
                 image.length === 0 &&
-                <ImagePickerCloud setImages={setImage} images={image} />
+                // <ImagePickerCloud setImages={setImage} images={image} />
+                <DragDropFile setImages={setImage} images={image} />
             }
 
             <IconButton

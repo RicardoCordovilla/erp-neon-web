@@ -7,6 +7,7 @@ import Trash from '@mui/icons-material/Delete';
 import ImagePicker from '../utils/ImagePicker';
 import ImagesContainer from '../utils/ImagesContinaer';
 import ImagePickerCloud from '../utils/ImagePickerCloud';
+import DragDropFile from '../examples/DragDropFIle';
 
 
 const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
@@ -51,11 +52,9 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
       .then((response) => {
         console.log(response)
         setNewSign(response.data)
+        setOpenModal(false)
       }).catch((error) => {
         console.log(error)
-      })
-      .finally(() => {
-        setOpenModal(false)
       })
   }
 
@@ -182,108 +181,125 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
             }}
           >
 
+            <Typography variant='h6'>
+              Imagenes
+            </Typography>
             <ImagesContainer images={images} setImages={setImages} />
             {/* <ImagePicker setImages={setImages} images={images} /> */}
-            <ImagePickerCloud setImages={setImages} images={images} />
+            {/* <ImagePickerCloud setImages={setImages} images={images} /> */}
+            <DragDropFile
+              setImages={setImages} images={images}
+            />
 
           </Card>
 
-          <Typography variant='h6'>
-            Productos
-          </Typography>
-
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            width: '100%',
-          }}>
-            {
-              signProducts?.map((product, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                    width: '100%',
-                  }}
-                >
-                  <Typography variant='h6'>
-                    {product?.product?.name}
-                  </Typography>
-                  <Typography variant='h6'>
-                    {product?.quantity}
-                  </Typography>
-                  <IconButton
-                    onClick={() => {
-                      const newSignProducts = [...signProducts]
-                      newSignProducts.splice(index, 1)
-                      setSignProducts(newSignProducts)
-                    }}
-                  >
-                    <Trash />
-                  </IconButton>
-                </Box>
-              ))
-            }
-          </Box>
-
-          <Box
+          <Card
             sx={{
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
+              flexDirection: 'column',
               gap: '1rem',
               width: '100%',
+              p: 2
             }}
           >
-            {/* <Typography variant='h6'>
+            <Typography variant='h6'>
+              Productos
+            </Typography>
+
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+              width: '100%',
+            }}>
+              {
+                signProducts?.map((product, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      gap: '1rem',
+                      width: '100%',
+                    }}
+                  >
+                    <Typography variant='h6'>
+                      {product?.product?.name}
+                    </Typography>
+                    <Typography variant='h6'>
+                      {product?.quantity}
+                    </Typography>
+                    <IconButton
+                      onClick={() => {
+                        const newSignProducts = [...signProducts]
+                        newSignProducts.splice(index, 1)
+                        setSignProducts(newSignProducts)
+                      }}
+                    >
+                      <Trash />
+                    </IconButton>
+                  </Box>
+                ))
+              }
+            </Box>
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                gap: '1rem',
+                width: '100%',
+              }}
+            >
+              {/* <Typography variant='h6'>
               Productos
             </Typography> */}
 
-            <TextField
-              sx={
-                {
-                  width: '20%',
+              <TextField
+                sx={
+                  {
+                    width: '20%',
+                  }
                 }
-              }
-              id="outlined-basic"
-              label="Cantidad"
-              variant="standard"
-              value={product?.quantity}
-              onChange={(e) => setProduct({ ...product, quantity: e.target.value })}
-              placeholder='ej: 2'
-              type='number'
-            />
+                id="outlined-basic"
+                label="Cantidad"
+                variant="standard"
+                value={product?.quantity}
+                onChange={(e) => setProduct({ ...product, quantity: e.target.value })}
+                placeholder='ej: 2'
+                type='number'
+              />
 
-            <Autocomplete
-              sx={
-                {
-                  width: '100%',
+              <Autocomplete
+                sx={
+                  {
+                    width: '100%',
+                  }
                 }
-              }
-              // multiple
-              id="tags-standard"
-              options={products}
-              getOptionLabel={(option) => option.name}
-              onChange={(event, value) => setProduct({ ...product, product: value })}
-              renderInput={(params) => (
-                <TextField {...params} variant="standard" label="Productos" placeholder='ej: 2000' />
-              )}
-            />
-            <IconButton
-              onClick={() => {
-                console.log('addProduct', product)
-                setSignProducts([...signProducts, product])
-                setProduct({ product: null, quantity: null })
-              }}
-            >
-              <AddCircleOutlineIcon />
-            </IconButton>
+                // multiple
+                id="tags-standard"
+                options={products}
+                getOptionLabel={(option) => option.name}
+                onChange={(event, value) => setProduct({ ...product, product: value })}
+                renderInput={(params) => (
+                  <TextField {...params} variant="standard" label="Productos" placeholder='ej: 2000' />
+                )}
+              />
+              <IconButton
+                onClick={() => {
+                  console.log('addProduct', product)
+                  setSignProducts([...signProducts, product])
+                  setProduct({ product: null, quantity: null })
+                }}
+              >
+                <AddCircleOutlineIcon />
+              </IconButton>
 
-          </Box>
+            </Box>
+
+          </Card>
 
         </Box>
 
