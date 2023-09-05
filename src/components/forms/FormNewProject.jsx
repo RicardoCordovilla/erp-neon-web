@@ -78,7 +78,7 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
 
 
 
-    const saveProject = () => {
+    const createProject = () => {
         const url = config.api.baseUrl + config.api.projects
         const customer_id = customer?.id
         const body = { customer_id, title, address, confirmationDate, cost, sale, quote, pays, projectSigns, instalationDate, estimatedEnd, additionalProducts, notes, otherContacts }
@@ -89,11 +89,9 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
             .then((response) => {
                 console.log(response)
                 setNewProject(response.data)
+                setOpenModal(false)
             }).catch((error) => {
                 console.log(error)
-            })
-            .finally(() => {
-                setOpenModal(false)
             })
     }
 
@@ -109,11 +107,9 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
             .then((response) => {
                 console.log(response)
                 setNewProject(body)
+                setOpenModal(false)
             }).catch((error) => {
                 console.log(error)
-            })
-            .finally(() => {
-                setOpenModal(false)
             })
     }
 
@@ -521,7 +517,7 @@ const FormNewProject = ({ item, setNewProject, setOpenModal }) => {
 
             <Button variant="contained" color="success"
                 sx={{ mt: '2rem' }}
-                onClick={() => { item?.id ? updateProject() : saveProject() }}
+                onClick={() => { item?.id ? updateProject() : createProject() }}
             >
                 Guardar
             </Button>

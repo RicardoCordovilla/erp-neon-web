@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,16 +6,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Box, Card, Collapse, IconButton, Modal, Typography } from '@mui/material';
+import { Box, Card, Chip, Collapse, IconButton, Modal, Paper, Tooltip, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Edit } from '@mui/icons-material';
 import ModalPaysview from '../../components/utils/ModalPaysview';
+import axios from 'axios';
+import { config } from '../../../config';
 
 const columns = [
     { id: 'viewicon', label: ' ', align: 'center' },
-    // { id: 'images[0]', label: 'Imagen', with: 250, align: 'center' },
+    { id: 'customer', label: 'Cliente', align: 'center' },
     { id: 'instalationDate', label: 'Fecha instalacion', align: 'center', format: (value) => value.toLocaleString('en-US'), },
     { id: 'title', label: 'Proyecto', align: 'center' },
     {
@@ -27,6 +28,7 @@ const columns = [
     },
     { id: 'quote', label: 'Cotización', align: 'center' },
     { id: 'pays', label: 'Pagos', align: 'center' },
+    { id: 'status', label: 'Pago', align: 'center' },
     { id: 'editicon', label: '', align: 'center' },
 
 ];
@@ -40,6 +42,7 @@ const Row = ({ row, setNewProject, setOpenModal }) => {
     const [open, setOpen] = React.useState(false);
     const [projectSigns, setProjectSigns] = useState([])
     const [openModalPays, setOpenModalPays] = useState(false)
+    const [customers, setCustomers] = useState([])
 
 
     const handleEditProject = () => {
@@ -47,6 +50,22 @@ const Row = ({ row, setNewProject, setOpenModal }) => {
         setNewProject(row)
     }
 
+    const getCustomers = () => {
+        const url = config.api.baseUrl + config.api.customers
+        console.log(url)
+        axios.get(url)
+            .then(res => {
+                console.log(res.data)
+                setCustomers(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    useEffect(() => {
+        getCustomers()
+    }, [])
 
     return (
         <React.Fragment>
@@ -59,6 +78,18 @@ const Row = ({ row, setNewProject, setOpenModal }) => {
                     >
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
+                </TableCell>
+                <TableCell align="center">
+                    <Tooltip
+                        arrow
+                        sx={{ fontSize: '1.3rem' }}
+                        title={
+                            customers.find(customer => customer.id === row?.customer_id)?.phone
+                        } placement="top">
+                        <span variant='span' sx={{ fontSize: '1.3rem' }}>
+                            {customers.find(customer => customer.id === row?.customer_id)?.name}
+                        </span>
+                    </Tooltip>
                 </TableCell>
                 <TableCell align="center">{row?.instalationDate}</TableCell>
                 <TableCell align="center">{row?.title}</TableCell>
@@ -104,6 +135,18 @@ const Row = ({ row, setNewProject, setOpenModal }) => {
                     } */}
                 </TableCell>
                 <TableCell align="center">
+                    <Chip
+                        label={
+                            row?.pays.reduce((a, c) => a + Number(c.value), 0) >= row?.sale
+                                ? 'Pagado'
+                                : `Pendiende $${row?.sale - row?.pays.reduce((a, c) => a + Number(c.value), 0)}`
+                        }
+                        color={
+                            row?.pays.reduce((a, c) => a + Number(c.value), 0) >= row?.sale ? 'success' : 'warning'
+                        }
+                    />
+                </TableCell>
+                <TableCell align="center">
                     <IconButton
                         // aria-label="expand row"
                         size="small"
@@ -112,6 +155,7 @@ const Row = ({ row, setNewProject, setOpenModal }) => {
                         <Edit />
                     </IconButton>
                 </TableCell>
+
             </TableRow>
 
             <TableRow>
