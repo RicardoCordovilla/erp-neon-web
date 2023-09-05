@@ -49,7 +49,6 @@ const ModalGalery = ({ selectedImages, setSelectedImages }) => {
                     width: '100%',
                 }}
             >
-                <ImagePicker images={images} setImages={setImages} accept={'image/*'} />
                 <ImageList
                     sx={{
                         width: '100%',
@@ -63,6 +62,8 @@ const ModalGalery = ({ selectedImages, setSelectedImages }) => {
                     // rowHeight={200}
                     gap={'1rem'}
                 >
+                    <ImagePicker images={images} setImages={setImages} accept={'image/*'} />
+
                     {images && images.map((item) => {
                         const cols = item.featured ? 2 : 1;
                         const rows = item.featured ? 2 : 1;
