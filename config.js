@@ -1,7 +1,7 @@
 export const config = {
     api: {
-        baseUrl: 'http://localhost:9000/api',
-        // baseUrl: 'https://erp-neon-api-production.up.railway.app/api',
+        // baseUrl: 'http://localhost:9000/api',
+        baseUrl: 'https://erp-neon-api-production.up.railway.app/api',
         products: '/products',
         projects: '/projects',
         signs: '/signs',
