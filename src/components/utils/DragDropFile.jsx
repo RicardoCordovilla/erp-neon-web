@@ -15,11 +15,12 @@ const DragDropFile = ({ setImages, images }) => {
 
 
     const handleChange = (file) => {
+        const auxname=file[0].name.split(' ').join('').trim()
         setFile(file[0]);
-        console.log(file[0].name)
+        console.log(auxname)
         const reader = new FileReader()
         let filePath = file[0].type.includes('image') ? 'images/' : 'files/'
-        filePath += file[0].name
+        filePath += auxname
         console.log(filePath)
         setPath(filePath)
         reader.onload = () => {
@@ -32,6 +33,7 @@ const DragDropFile = ({ setImages, images }) => {
 
 
     const uploadImage = async () => {
+
         setUploading(true)
         const result = await uploadFile(file, path)
             .then(response => {

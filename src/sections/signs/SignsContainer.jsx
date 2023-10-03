@@ -34,6 +34,7 @@ const SignsContainer = ({ }) => {
     }
 
     React.useEffect(() => {
+        console.log(newSign)
         getSigns()
     }, [newSign])
 

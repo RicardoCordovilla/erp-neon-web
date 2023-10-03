@@ -37,7 +37,12 @@ const ProjectsContainer = ({ customerId = null }) => {
     return (
         <>
             <Container>
-                <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                }}
+                >
                     <Typography variant='h5' align='left' sx={{ margin: '20px 16px' }}>Proyectos</Typography>
                     <IconButton aria-label="expand row" size="small" sx={{ margin: '0px 16px' }}
                         onClick={() => {
@@ -47,7 +52,35 @@ const ProjectsContainer = ({ customerId = null }) => {
                     >
                         <AddCircleOutlineIcon />
                     </IconButton>
+                    <Box sx={{
+                        flexGrow: 1,
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center',
+                        paddingRight: '3rem',
+                    }}
+                    >
+                        <Typography variant='h5' align='left' sx={{
+                            color: '#f44336',
+                            backgroundColor: '#ff0',
+                            padding: '0.5rem',
+                        }}
+                        >
+                            Pendiente por pagar:
+                            {
+                                projects.filter((project) => {
+                                    return project?.paystatus === 'Pendiente'
+                                }).reduce((total, project) => {
+                                    return (total + Number(project?.sale) - project.pays.reduce((total, pay) => {
+                                        return total + Number(pay.value)
+                                    }, 0))
+                                }, 0)
+                            }
+                        </Typography>
+                    </Box>
+
                 </Box>
+
                 <ProjectsList rows={projects} setNewProject={setNewProject} setOpenModal={setOpenModal} />
             </Container>
             <Modal

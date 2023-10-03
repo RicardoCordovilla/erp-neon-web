@@ -76,7 +76,12 @@ const CustomersContainer = () => {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         {newCustomer ? 'Editar Cliente' : 'Nuevo Cliente'}
                     </Typography>
-                    <FormNewCustomer setCustomers={setCustomers} customers={customers} customer={newCustomer} setOpenModal={setOpenModal} />
+                    <FormNewCustomer
+                        setCustomers={setCustomers}
+                        customers={customers}
+                        customer={newCustomer}
+                        setOpenModal={setOpenModal}
+                    />
                 </Card>
             </Modal>
         </>

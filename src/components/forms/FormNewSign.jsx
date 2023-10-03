@@ -10,7 +10,7 @@ import ImagePickerCloud from '../utils/ImagePickerCloud';
 import DragDropFile from '../utils/DragDropFile';
 
 
-const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
+const FormNewSign = ({ setNewSign, item, setOpenModal, setSigns, signs }) => {
 
   const [title, setTitle] = useState(item?.title || '')
   const [description, setDescription] = useState(item?.description || '')
@@ -23,8 +23,23 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
   const [products, setProducts] = useState([])
   const [product, setProduct] = useState(null)
 
+  const deleteSign = () => {
+    if (confirm('¿Estas seguro de eliminar este letrero?')) {
+      const url = config.api.baseUrl + config.api.signs + '/id/' + item.id
+      console.log(url)
+      axios.delete(url)
+        .then((response) => {
+          console.log(response)
+          setNewSign(null)
+          setOpenModal(false)
+        }).catch((error) => {
+          console.log(error)
+        })
+    }
+  }
 
-  const saveSign = () => {
+
+  const createSign = () => {
     const url = config.api.baseUrl + config.api.signs
     const body = { title, description, images, startProject, endProject, sale, cost, signProducts }
     console.log(url, body)
@@ -33,7 +48,9 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
     )
       .then((response) => {
         console.log(response)
-        setNewSign(null)
+        setNewSign(response.data)
+        setOpenModal(false)
+        setSigns([response.data, ...signs])
       }).catch((error) => {
         console.log(error)
       })
@@ -48,15 +65,13 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
     )
       .then((response) => {
         console.log(response)
-        setNewSign(null)
+        setNewSign(body)
         setOpenModal(false)
       }).catch((error) => {
         console.log(error)
       })
 
   }
-
-
 
 
   const addProducts = () => {
@@ -69,9 +84,9 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
       .then((response) => {
         console.log(response)
         setNewSign(null)
+        item?.id ? updateSing() : createSign()
+        // updateSing()
         setOpenModal(false)
-        updateSing()
-
       }).catch((error) => {
         console.log(error)
       })
@@ -98,6 +113,13 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
   useEffect(() => {
     getProducts()
   }, [])
+
+  useEffect(() => {
+    console.log(signProducts)
+    console.log(signProducts?.reduce((acc, product) => acc + (product?.product?.price * product?.quantity), 0))
+    setCost(signProducts?.reduce((acc, product) => acc + (product?.product?.price * product?.quantity), 0))
+
+  }, [signProducts])
 
 
 
@@ -329,12 +351,30 @@ const FormNewSign = ({ setNewSign, item, setOpenModal }) => {
 
       <Button variant="contained"
         onClick={() => {
-          item?.id ? addProducts() : saveSign()
+          item?.id ? addProducts() : createSign()
         }}
       >
         {item?.id ? 'Actualizar' : 'Guardar'}
       </Button>
 
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        gap: '1rem',
+        width: '100%',
+        height: '50rem',
+      }}>
+
+        <span>zona de riesgo</span>
+        <span>Eliminar</span>
+        <Button
+          variant="text"
+          color="error"
+          onClick={() => deleteSign()}
+        >eliminar</Button>
+      </Box>
     </Card>
   )
 }

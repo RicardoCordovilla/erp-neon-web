@@ -73,7 +73,7 @@ const PaysField = ({ pays, setPays }) => {
                     setValue('')
                     setImage('')
                 }}
-                disabled={value === '' || image.length === 0 || date === ''}
+                disabled={value === ''|| date === ''}
             >
                 <AddCircleOutlineIcon />
             </IconButton>

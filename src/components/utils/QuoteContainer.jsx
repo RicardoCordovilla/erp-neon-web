@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ImagePicker from './ImagePicker'
 import DragDropFile from './DragDropFile'
 
-const QuoteContainer = ({ quote, setQuote }) => {
+const QuoteContainer = ({ quote=null, setQuote }) => {
 
     const [quoteFileName, setQuoteFileName] = useState('')
     const [fileUrls, setFileUrls] = useState([quote])
